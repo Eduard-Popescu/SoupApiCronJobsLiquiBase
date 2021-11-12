@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.util.Objects;
@@ -21,6 +23,13 @@ public class ExtractPerson {
     private String name;
 
     private Float sold;
+
+    @NotNull(message = "The email should not be null.")
+    @Email(message = "The email should have a correct format.")
+    private String email;
+
+    @NotNull(message = "The address should not be null.")
+    private String address;
 
     @Override
     public boolean equals(Object o) {

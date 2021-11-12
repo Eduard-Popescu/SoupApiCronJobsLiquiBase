@@ -8,6 +8,6 @@
       http://www.liquibase.org/xml/ns/pro
       http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.1.xsd">
 
-    <include file="db/sql.script/V3_sql_script_create_table_balance.sql" />
+    <include file="db/sql.script/V2_sql_script_add_address_and_email_in_person_table.sql" />
 
 </databaseChangeLog>
