@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+    <Person id='1' name='Popescu Eduard' sold='300.0' email='popescueduard50@yahoo.com' address='Str.newYork Nr.300'/>
+    <Person id='2' name='Andrei Mihai' sold='500.0' email='andreimihai45@yahoo.com' address='Str.newYork Nr.301'/>
+    <Person id='3' name='Ionut Edy' sold='600.0' email='ionutedy234@yahoo.com' address='Str.newYork Nr.350'/>
+
+
+
+
+</dataset>

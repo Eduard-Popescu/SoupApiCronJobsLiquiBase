@@ -4,7 +4,6 @@ import com.example.demo.domain.Person;
 import com.example.demo.domain.dto.input.SavePerson;
 import com.example.demo.domain.dto.output.ExtractPerson;
 import com.example.demo.mapper.PersonMapper;
-import com.example.demo.repository.BalanceRepository;
 import com.example.demo.repository.PersonRepository;
 import com.example.demo.service.api.PersonService;
 import graphql.GraphQL;
@@ -40,7 +39,7 @@ public class PersonServiceImpl implements PersonService {
   private final PersonRepository personRepository;
 
   @Autowired
-  public PersonServiceImpl(PersonRepository personRepository, BalanceRepository balanceRepository){
+  public PersonServiceImpl(PersonRepository personRepository){
         this.personRepository = personRepository;
   }
 
