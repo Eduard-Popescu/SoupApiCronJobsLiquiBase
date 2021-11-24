@@ -36,7 +36,7 @@ public class PersonController {
         return ResponseEntity.ok(personService.getPersonById(personId));
     }
 
-    @PostMapping
+    @PostMapping("savePerson")
     public ResponseEntity<String> savePerson(@RequestBody SavePerson person){
         personService.savePerson(person);
         return new ResponseEntity<>("The person was successfully saved", HttpStatus.ACCEPTED);

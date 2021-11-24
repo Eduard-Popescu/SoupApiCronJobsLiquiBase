@@ -1,6 +1,7 @@
 package com.example.demo.service.implementation;
 
 import com.example.demo.domain.Person;
+import com.example.demo.domain.SecurityPerson;
 import com.example.demo.domain.dto.input.SavePerson;
 import com.example.demo.domain.dto.output.ExtractPerson;
 import com.example.demo.mapper.PersonMapper;
@@ -17,6 +18,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -77,6 +80,12 @@ public class PersonServiceImpl implements PersonService {
         return PersonMapper.PersonToExtractPerson(person);
    }
 
+    @Override
+    public Person findByEmail(String email) {
+        return personRepository.findByEmail(email)
+            .orElseThrow(PersonWithSpecifiedIdWasNotFoundException::new);
+    }
+
    @Transactional
    public void savePerson(SavePerson person){
       this.personRepository.save(PersonMapper.SavePersonToPerson(person));
@@ -86,4 +95,11 @@ public class PersonServiceImpl implements PersonService {
       return this.graphQL;
    }
 
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        return new SecurityPerson(this.findByEmail(username));
+    }
+
+    static class PersonWithSpecifiedIdWasNotFoundException extends RuntimeException {
+    }
 }
