@@ -18,6 +18,10 @@ configurations {
 
 }
 
+ext{
+	set('springCloudVersion', "2020.0.4")
+}
+
 repositories {
 	mavenCentral()
 	maven { url 'https://repo.spring.io/milestone' }
@@ -68,7 +72,24 @@ dependencies {
 	implementation group: 'org.springframework.security', name: 'spring-security-config', version: '5.6.0'
 
 
+	implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
 
+	// to write test class using junit jupiter
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+	// to write integration test and mock stub using WireMock
+	testImplementation 'org.springframework.cloud:spring-cloud-starter-contract-stub-runner'
+
+	implementation 'io.github.openfeign:feign-httpclient'
+
+	implementation 'io.github.openfeign:feign-okhttp'
+
+}
+
+dependencyManagement {
+	imports {
+		mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+	}
 }
 
 test {

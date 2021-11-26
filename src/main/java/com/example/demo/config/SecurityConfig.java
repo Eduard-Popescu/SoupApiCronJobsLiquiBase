@@ -50,6 +50,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .authenticated()
             .antMatchers("/api/Wsdl/NumberToWords")
             .authenticated()
+            .antMatchers("/api/posts/**")
+            .authenticated()
             .and()
             .httpBasic();
     }
