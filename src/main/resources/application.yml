@@ -1,0 +1,3 @@
+client:
+  post:
+    baseUrl: https://jsonplaceholder.typicode.com

@@ -1,0 +1,17 @@
+schema{
+    query: Query
+}
+type Query{
+
+  getAllPersons : [ExtractPerson]
+    getPersonById(personId : String) : ExtractPerson
+}
+
+type ExtractPerson{
+
+    personId: String
+    name: String
+    sold : String
+    email: String
+    address: String
+}

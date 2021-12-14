@@ -7,7 +7,12 @@ import com.example.demo.domain.dto.output.ExtractPerson;
 public class PersonMapper {
 
     public static Person SavePersonToPerson (SavePerson pers){
-    return Person.builder().name(pers.getName()).sold(pers.getSold()).build();
+    return Person.builder()
+        .name(pers.getName())
+        .sold(pers.getSold())
+        .email(pers.getEmail())
+        .address(pers.getAddress())
+        .build();
     }
 
     public static ExtractPerson PersonToExtractPerson (Person person){
@@ -15,6 +20,8 @@ public class PersonMapper {
         .personId(person.getId())
         .name(person.getName())
         .sold(person.getSold())
+        .email(person.getEmail())
+        .address(person.getAddress())
         .build();
     }
 }

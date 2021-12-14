@@ -2,7 +2,9 @@ plugins {
 	id 'org.springframework.boot' version '2.5.5'
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
 	id 'java'
+
 }
+
 
 group = 'com.example'
 version = '0.0.1-SNAPSHOT'
@@ -13,16 +15,23 @@ configurations {
 		extendsFrom annotationProcessor
 	}
 	jaxb
+
+}
+
+ext{
+	set('springCloudVersion', "2020.0.4")
 }
 
 repositories {
 	mavenCentral()
 	maven { url 'https://repo.spring.io/milestone' }
 	maven { url 'https://repo.spring.io/snapshot' }
+
 }
 
 dependencies {
-	jaxb (
+	implementation 'org.projectlombok:lombok:1.18.18'
+    jaxb (
 			'com.sun.xml.bind:jaxb-core',
 			'com.sun.xml.bind:jaxb-xjc',
 			'com.sun.xml.bind:jaxb-impl'
@@ -32,6 +41,9 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-validation:2.4.0'
 	implementation 'org.springframework.ws:spring-ws-core'
+	implementation 'com.graphql-java:graphql-java:11.0' // NEW
+	implementation 'com.graphql-java:graphql-java-spring-boot-starter-webmvc:1.0' // NEW
+	implementation 'com.google.guava:guava:26.0-jre' // NEW
 	compileOnly 'org.projectlombok:lombok'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	runtimeOnly 'com.h2database:h2'
@@ -39,11 +51,52 @@ dependencies {
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	implementation 'javax.xml.soap:javax.xml.soap-api:1.4.0'
+	testImplementation group: 'org.dbunit', name: 'dbunit', version: '2.7.0'
+	implementation 'com.github.springtestdbunit:spring-test-dbunit:1.3.0'
+	implementation 'com.sun.xml.messaging.saaj:saaj-impl:1.5.1'
+	// https://mvnrepository.com/artifact/org.mockito/mockito-all
+	testImplementation('org.junit.jupiter:junit-jupiter:5.5.2')
+	testImplementation 'org.powermock:powermock-module-junit4:2.0.2'
+	testImplementation 'org.powermock:powermock-api-mockito2:2.0.2'
+
+	// https://mvnrepository.com/artifact/org.springframework.security/spring-security-core
+	implementation group: 'org.springframework.security', name: 'spring-security-core', version: '5.6.0'
+	implementation 'io.jsonwebtoken:jjwt-api:0.11.2'
+	runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.2'
+	runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.11.2'
+	// https://mvnrepository.com/artifact/org.springframework.security/spring-security-test
+	testImplementation group: 'org.springframework.security', name: 'spring-security-test', version: '5.6.0'
+    // https://mvnrepository.com/artifact/org.springframework.security/spring-security-web
+	implementation group: 'org.springframework.security', name: 'spring-security-web', version: '5.6.0'
+	// https://mvnrepository.com/artifact/org.springframework.security/spring-security-config
+	implementation group: 'org.springframework.security', name: 'spring-security-config', version: '5.6.0'
+
+
+	implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
+
+	// to write test class using junit jupiter
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+	// to write integration test and mock stub using WireMock
+	testImplementation 'org.springframework.cloud:spring-cloud-starter-contract-stub-runner'
+
+	implementation 'io.github.openfeign:feign-httpclient'
+
+	implementation 'io.github.openfeign:feign-okhttp'
+
+}
+
+dependencyManagement {
+	imports {
+		mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+	}
 }
 
 test {
 	useJUnitPlatform()
 }
+
+
 
 task generateJavaClasses {
 	System.setProperty('javax.xml.accessExternalSchema', 'all')

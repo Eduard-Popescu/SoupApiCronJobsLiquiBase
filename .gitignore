@@ -35,3 +35,5 @@ out/
 
 ### VS Code ###
 .vscode/
+/src/main/java/com/example/demo/graphqlapi/GraphQLDataFetchers.java
+/src/main/java/com/example/demo/graphqlapi/GraphQLProvider.java
